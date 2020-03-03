@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Oxanium:400,500,600,700&display=swap');
+
+.container {
+    font-family: 'Oxanium', sans-serif;
+    height: 100vw;
+    text-align: center;
+}
+
+#question-container {
+    font-weight: 500;
+    margin: 50px 100px;
+}
+
+.start-button {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    display: block;
+    margin: 0 auto;
+    padding: 1em 5em;
+    text-transform: uppercase;
+}
+
+.start-button:hover {
+    background-color: #EF476F;
+    border: 1px solid #792359;
+}
+
+.question-button {
+    background-color: #B6244F;
+    border: 1px solid #792359;
+    color: #000000;
+    display: block;
+    margin: 20px auto;
+    padding: 1em 5em;
+}
+
+.question-button:hover {
+    background-color: #ffffff;
+    border: 1px solid #792359;
+}
+
+.timer {
+    font-size: 12em;
+    color: #B6244F;
+}
