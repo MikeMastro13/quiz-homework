@@ -2,6 +2,8 @@
 var startButton = document.querySelector("#start-button");
 var questionContainer = document.querySelector("#question-container");
 var buttonContainer = document.querySelector("#button-container");
+var timerContainer = document.querySelector("#timer-area");
+var answerContainer = document.querySelector("#answer-area");
 
 //Set up the question object
 var question = [
@@ -44,56 +46,54 @@ function startQuiz() {
 }
 
 function changeStartContent() {
-    document.body.style.backgroundColor = "#2C2C34";
     startButton.parentNode.removeChild(startButton);
-    questionContainer.style.color = "#fff";
+    document.body.setAttribute("class", "dark-mode");
+    questionContainer.setAttribute("class", "question-container");
+    timerContainer.setAttribute("class", "timer");
 }
 
 function addQuestions() {
     for(var i = 0; i < question.length; i++) {
         if (questionCount === i) {
             question[i].answers.forEach((answer, index) => {
-                var btn = document.createElement("button");
-                questionContainer.textContent = question[i].question;
-                btn.setAttribute("class", "btn question-button");
-                btn.setAttribute("id", "btn-" + index);
-                btn.textContent = answer;
-                btn.addEventListener("click", (event) => {
-                    // Add one to the index to check answer
-                    if (question[questionCount].answer === index + 1) {
-                        // Right Answer
-                        // score++;
-                        // addScore();
-                        //Need to reset content for the next button, might combine the changeStartContent() and removeContent into one function
-                        totalSeconds += 10;
-                        questionCount++;
-                        removeContent();
-                        
-                    } else {
-                        // Wrong Answer
-                        //Gonna remove some of the timer
-                        totalSeconds -= 10;
-                    }
-                });
-                buttonContainer.appendChild(btn);
+                if (questionCount === 0) {
+                    var btn = document.createElement("button");
+                    btn.setAttribute("class", "btn question-button");
+                    btn.setAttribute("id", "btn-" + index);
+                    btn.textContent = answer;
+                    questionContainer.textContent = question[i].question; 
+                    btn.addEventListener("click", (event) => {
+                        // Add one to the index to check answer
+                        if (question[questionCount].answer === index + 1) {
+                            console.log("Hey");
+                            // Right Answer
+                            // score++;
+                            // addScore();
+                            //Need to reset content for the next button, might combine the changeStartContent() and removeContent into one function
+                            totalSeconds += 10;
+                            questionCount++;
+                            addQuestions();
+                            
+                        } else {
+                            // Wrong Answer
+                            // answerContainer.textContent = "Wrong Answer!";
+                            totalSeconds -= 10;
+                            addQuestions();
+                        }
+                    });
+                    buttonContainer.appendChild(btn);
+                } else if (questionCount > 0){
+                    var btn = document.querySelector("#btn-" + index);
+                    questionContainer.textContent = question[i].question;        
+                    btn.textContent = answer;
+                }
+                
             });
         } else if (questionCount === question.length) {
+            buttonContainer.textContent = "";
             clearInterval(interval);
             questionContainer.textContent = "Congratulations you've won!";
         }
-    }
-}
-
-//Change to edit the text content inside of the buttons
-function removeContent() {
-    for (var i = 0; i < 3; i++) {
-        var btn = document.querySelector("#btn-0");
-        var btn1 = document.querySelector("#btn-1");
-        var btn2 = document.querySelector("#btn-2");
-        btn.parentNode.removeChild(btn);
-        btn1.parentNode.removeChild(btn1);
-        btn2.parentNode.removeChild(btn2);
-        addQuestions();
     }
 }
 
