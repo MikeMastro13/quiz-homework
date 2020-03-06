@@ -19,21 +19,34 @@ var question = [
         question: "Which finger is the best finger?",
         answers: ["Pinky", "Thumb", "Pointer"],
         answer: 3
-    }    
+    },
+    {
+        question: "What is the correct amount of pillows to sleep on?",
+        answers: ["0", "1", "2"],
+        answer: 3
+    },
+    {
+        question: "Question. What's the answer?",
+        answers: ["The real answer", "No I'm the real answer", "I'm not the real answer"],
+        answer: 3
+    }
 ];
 
 var questionCount = 0;
 var score = 0;
 var interval;
-var totalSeconds = 15;
+var totalSeconds = 999;
 
 function startQuiz() {
-    // changeStartContent();
-    //This removes the start button, will change more than that at some point
-    startButton.parentNode.removeChild(startButton);
-
+    changeStartContent();
     startTime();
     addQuestions();
+}
+
+function changeStartContent() {
+    document.body.style.backgroundColor = "#2C2C34";
+    startButton.parentNode.removeChild(startButton);
+    questionContainer.style.color = "#fff";
 }
 
 function addQuestions() {
